@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #f7f7f7;
+  background: #0a0a0a;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 20% 12%, rgba(255, 213, 0, 0.12), transparent 28%),
+    linear-gradient(135deg, #0a0a0a 0%, #10110d 50%, #0a0a0a 100%);
+  font-feature-settings: "kern";
+}
+
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stadium-grid {
+  background-image:
+    linear-gradient(rgba(255, 213, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 213, 0, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.clip-score {
+  clip-path: polygon(0 0, 94% 0, 100% 50%, 94% 100%, 0 100%);
+}
+
+.stadium-lines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(90deg, transparent 0 47%, rgba(255, 213, 0, 0.55) 47% 48%, transparent 48% 100%),
+    radial-gradient(circle at 50% 50%, transparent 0 13%, rgba(255, 213, 0, 0.5) 13.2% 13.6%, transparent 13.8%),
+    linear-gradient(rgba(255, 213, 0, 0.12) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 64px 64px;
+  animation: pitchDrift 18s linear infinite;
+}
+
+.glow-one,
+.glow-two {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(44px);
+}
+
+.glow-one {
+  right: 10%;
+  top: 22%;
+  height: 220px;
+  width: 220px;
+  background: rgba(255, 213, 0, 0.22);
+}
+
+.glow-two {
+  bottom: 15%;
+  left: 5%;
+  height: 260px;
+  width: 260px;
+  background: rgba(255, 59, 48, 0.14);
+}
+
+::selection {
+  background: #ffd500;
+  color: #0a0a0a;
+}
+
+@keyframes pitchDrift {
+  from {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  to {
+    background-position: 0 0, 0 0, 64px 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
