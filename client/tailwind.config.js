@@ -3,7 +3,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        pitch: "#0A0A0A",
+        pitch: "#F8F5ED",
         line: "#FFD500",
         danger: "#FF3B30",
         turf: "#18b46b"
@@ -13,8 +13,9 @@ export default {
         sans: ["Inter", "system-ui", "sans-serif"]
       },
       boxShadow: {
-        neon: "0 0 26px rgba(255, 213, 0, 0.35)",
-        redglow: "0 0 20px rgba(255, 59, 48, 0.25)"
+        neon: "0 18px 55px rgba(255, 213, 0, 0.18)",
+        redglow: "0 18px 44px rgba(255, 59, 48, 0.14)",
+        premium: "0 22px 70px rgba(0, 0, 0, 0.34)"
       },
       keyframes: {
         shimmer: {

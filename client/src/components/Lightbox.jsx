@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import React from "react";
+import { SmartImage } from "./SmartImage";
 
 export function Lightbox({ item, onClose }) {
   return (
@@ -14,7 +15,7 @@ export function Lightbox({ item, onClose }) {
           onClick={onClose}
         >
           <motion.div
-            className="relative w-full max-w-5xl overflow-hidden rounded-md border border-white/10 bg-black"
+            className="relative w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-black"
             initial={{ scale: 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.92, opacity: 0 }}
@@ -27,7 +28,12 @@ export function Lightbox({ item, onClose }) {
             >
               <X className="h-5 w-5" />
             </button>
-            <img src={item.image} alt={item.title} className="max-h-[78vh] w-full object-cover" />
+            <SmartImage
+              src={item.image}
+              fallback={item.fallback}
+              alt={item.title}
+              className="max-h-[78vh] w-full object-cover"
+            />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black p-6">
               <p className="text-sm font-black uppercase tracking-[0.2em] text-line">{item.type}</p>
               <h3 className="font-display text-4xl uppercase">{item.title}</h3>
@@ -38,3 +44,5 @@ export function Lightbox({ item, onClose }) {
     </AnimatePresence>
   );
 }
+
+

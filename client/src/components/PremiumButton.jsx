@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 
 export function PremiumButton({ children, to, href, variant = "primary", className = "", icon = true, ...props }) {
   const base =
-    "group relative inline-flex min-h-12 items-center justify-center overflow-hidden rounded-md px-6 py-3 text-sm font-black uppercase tracking-normal transition";
+    "group relative inline-flex min-h-12 items-center justify-center overflow-hidden rounded-full px-6 py-3 text-sm font-black uppercase tracking-normal transition";
   const styles =
     variant === "ghost"
-      ? "border border-line/60 bg-black/40 text-line hover:border-line hover:shadow-neon"
-      : "bg-line text-black shadow-neon hover:shadow-[0_0_36px_rgba(255,213,0,0.48)]";
+      ? "border border-white/15 bg-white/[0.045] text-line hover:border-line/50 hover:bg-white/[0.08]"
+      : "bg-line text-black shadow-neon hover:shadow-[0_18px_55px_rgba(255,213,0,0.25)]";
   const content = (
     <>
       <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition duration-700 group-hover:translate-x-full" />
@@ -47,3 +47,5 @@ export function PremiumButton({ children, to, href, variant = "primary", classNa
 
   return <motion.button {...motionProps}>{content}</motion.button>;
 }
+
+

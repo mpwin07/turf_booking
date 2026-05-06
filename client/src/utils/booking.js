@@ -5,11 +5,28 @@ export function toMinutes(time) {
 
 export function addHours(time, hours) {
   const total = toMinutes(time) + hours * 60;
-  return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
+  const normalized = total % (24 * 60);
+  return `${String(Math.floor(normalized / 60)).padStart(2, "0")}:${String(normalized % 60).padStart(2, "0")}`;
 }
 
 export function overlaps(start, end, existingStart, existingEnd) {
-  return toMinutes(start) < toMinutes(existingEnd) && toMinutes(end) > toMinutes(existingStart);
+  const normalizeRange = (rangeStart, rangeEnd) => {
+    const startMinutes = toMinutes(rangeStart);
+    let endMinutes = toMinutes(rangeEnd);
+
+    if (endMinutes <= startMinutes) {
+      endMinutes += 24 * 60;
+    }
+
+    return [startMinutes, endMinutes];
+  };
+
+  const [newStart, newEnd] = normalizeRange(start, end);
+  const [oldStart, oldEnd] = normalizeRange(existingStart, existingEnd);
+  const adjustedOldStart = oldStart < newStart && oldEnd <= newStart ? oldStart + 24 * 60 : oldStart;
+  const adjustedOldEnd = oldStart < newStart && oldEnd <= newStart ? oldEnd + 24 * 60 : oldEnd;
+
+  return newStart < adjustedOldEnd && newEnd > adjustedOldStart;
 }
 
 export function isWeekend(date) {

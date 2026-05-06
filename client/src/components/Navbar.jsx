@@ -19,27 +19,27 @@ export function Navbar() {
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-50 transition ${
-        scrolled ? "border-b border-white/10 bg-black/70 shadow-2xl backdrop-blur-xl" : "bg-black/20 backdrop-blur-sm"
+        scrolled ? "border-b border-black/10 bg-white/85 shadow-xl backdrop-blur-xl" : "bg-white/70 backdrop-blur-sm"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         <Link to="/" className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-md bg-line font-display text-xl text-black shadow-neon">
+          <span className="grid h-10 w-10 place-items-center rounded-3xl bg-line font-display text-xl text-black shadow-neon">
             A
           </span>
-          <span className="hidden font-display text-xl uppercase leading-none text-white sm:block">
+          <span className="hidden font-display text-xl uppercase leading-none text-black sm:block">
             ACE
             <span className="block text-xs tracking-[0.32em] text-line">Arena</span>
           </span>
         </Link>
 
-        <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-2 py-1 md:flex">
+        <div className="hidden items-center gap-2 rounded-full border border-black/10 bg-white/80 px-2 py-1 shadow-sm md:flex">
           {navItems.map((item) => (
             <NavLink
               key={item.label}
               to={item.href}
               className={({ isActive }) =>
-                `relative rounded-full px-4 py-2 text-xs font-black uppercase text-white/70 transition hover:text-line ${
+                `relative rounded-full px-4 py-2 text-xs font-black uppercase text-black/70 transition hover:text-line ${
                   isActive ? "text-line" : ""
                 }`
               }
@@ -54,12 +54,12 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-3 md:flex">
           <PremiumButton to="/book">Book Slot</PremiumButton>
         </div>
 
         <button
-          className="rounded-md border border-white/10 bg-white/5 p-3 text-line md:hidden"
+          className="rounded-3xl border border-black/10 bg-white p-3 text-line shadow-sm md:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label="Toggle menu"
         >
@@ -70,7 +70,7 @@ export function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="border-t border-white/10 bg-black/95 px-4 py-5 md:hidden"
+            className="border-t border-black/10 bg-white/95 px-4 py-5 shadow-xl md:hidden"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
@@ -80,7 +80,7 @@ export function Navbar() {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="rounded-md bg-white/5 px-4 py-3 font-black uppercase text-white"
+                  className="rounded-3xl bg-black/[0.04] px-4 py-3 font-black uppercase text-black"
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
@@ -96,3 +96,5 @@ export function Navbar() {
     </header>
   );
 }
+
+

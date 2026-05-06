@@ -24,13 +24,14 @@ export const turf = {
   whatsapp: "[ENTER WHATSAPP NUMBER]",
   email: "[ENTER EMAIL]",
   instagram: "[ENTER INSTAGRAM LINK]",
-  address: "[ENTER ADDRESS]",
-  map: "https://www.google.com/maps",
+  address: "ACE Multisports Arena",
+  map: "https://www.google.com/maps/place/ace+multisports+arena/data=!4m2!3m1!1s0x3a5291fc5ed9265f:0x34fee5192daa632c?sa=X&ved=1t:242&ictx=111",
+  mapEmbed: "https://www.google.com/maps?q=ACE%20Multisports%20Arena&output=embed",
   weekdayPrice: 1200,
   weekendPrice: 1500,
   advanceAmount: 200,
   oneHourPrice: 700,
-  workingHours: "5:00 AM - 11:00 PM"
+  workingHours: "8:00 AM - 1:30 AM"
 };
 
 export const navItems = [
@@ -43,35 +44,54 @@ export const navItems = [
 
 export const gallery = [
   {
-    title: "Floodlight Arena",
+    title: "Covered Turf",
     type: "image",
     size: "large",
-    image:
+    image: "/arena/covered-turf-day.webp",
+    fallback:
       "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&w=1400&q=80"
   },
   {
-    title: "Match Tempo",
-    type: "video",
-    image:
+    title: "Street Entrance",
+    type: "image",
+    image: "/arena/entrance-signboard-day.webp",
+    fallback:
       "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1000&q=80"
   },
   {
-    title: "Coaching Hours",
+    title: "Kids Coaching",
     type: "image",
-    image:
+    image: "/arena/kids-coaching-session.webp",
+    fallback:
       "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=1000&q=80"
   },
   {
-    title: "Team Nights",
+    title: "Night Cricket",
     type: "image",
     size: "wide",
-    image:
+    image: "/arena/night-turf-cricket.webp",
+    fallback:
       "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    title: "Tournament Ready",
-    type: "video",
-    image:
+    title: "Brand Signage",
+    type: "image",
+    image: "/arena/night-signboard.webp",
+    fallback:
+      "https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    title: "Cricket Practice",
+    type: "image",
+    image: "/arena/day-cricket-practice.webp",
+    fallback:
+      "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    title: "Roofed Layout",
+    type: "image",
+    image: "/arena/roofed-turf-layout.webp",
+    fallback:
       "https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=1000&q=80"
   }
 ];
@@ -126,17 +146,14 @@ export const blockedSlots = [
 ];
 
 export const slotTimes = [
-  "05:00",
-  "06:00",
-  "07:00",
-  "08:00",
-  "16:00",
-  "17:00",
-  "18:00",
-  "19:00",
-  "20:00",
-  "21:00",
-  "22:00"
+  { label: "8 AM - 10 AM", start: "08:00", end: "10:00", duration: 2 },
+  { label: "10 AM - 12 PM", start: "10:00", end: "12:00", duration: 2 },
+  { label: "12 PM - 2 PM", start: "12:00", end: "14:00", duration: 2 },
+  { label: "2 PM - 5 PM", start: "14:00", end: "17:00", duration: 3 },
+  { label: "5 PM - 7 PM", start: "17:00", end: "19:00", duration: 2 },
+  { label: "7 PM - 9 PM", start: "19:00", end: "21:00", duration: 2 },
+  { label: "9 PM - 11 PM", start: "21:00", end: "23:00", duration: 2 },
+  { label: "11 PM - 1 AM", start: "23:00", end: "01:00", duration: 2 }
 ];
 
 export const adminStats = [
