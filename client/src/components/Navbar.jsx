@@ -36,7 +36,9 @@ export function Navbar() {
 
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const navbarOffset = 72;
+      const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: elementPosition - navbarOffset, behavior: "smooth" });
       window.history.replaceState(null, "", href);
       setActiveHash(href);
     }
@@ -49,14 +51,8 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-        <Link to="/" className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-3xl bg-line font-display text-xl text-black shadow-neon">
-            A
-          </span>
-          <span className="hidden font-display text-xl uppercase leading-none text-black sm:block">
-            ACE
-            <span className="block text-xs tracking-[0.32em] text-line">Arena</span>
-          </span>
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/icon.jpeg" alt="ACE Arena Logo" className="h-10 w-10 rounded-full object-cover shadow-neon" />
         </Link>
 
         <div className="hidden items-center gap-2 rounded-full border border-black/10 bg-white/80 px-2 py-1 shadow-sm md:flex">
@@ -84,6 +80,14 @@ export function Navbar() {
                     routeActive ? "text-line" : ""
                   }`
                 }
+                onClick={(e) => {
+                  if (item.href === "/" && location.pathname === "/") {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    window.history.replaceState(null, "", "/");
+                    setActiveHash("");
+                  }
+                }}
               >
                 {({ isActive: routeActive }) => (
                   <>
@@ -134,7 +138,15 @@ export function Navbar() {
                     key={item.label}
                     to={item.href}
                     className="rounded-3xl bg-black/[0.04] px-4 py-3 font-black uppercase text-black"
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => {
+                      setOpen(false);
+                      if (item.href === "/" && location.pathname === "/") {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                        window.history.replaceState(null, "", "/");
+                        setActiveHash("");
+                      }
+                    }}
                   >
                     {item.label}
                   </Link>

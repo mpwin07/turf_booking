@@ -3,7 +3,7 @@ import React from "react";
 
 export function Section({ id, eyebrow, title, children, className = "" }) {
   return (
-    <section id={id} className={`relative scroll-mt-24 px-4 py-20 sm:py-28 ${className}`}>
+    <section id={id} className={`relative scroll-mt-20 px-4 pt-14 pb-20 sm:pt-20 sm:pb-28 ${className}`}>
       <motion.div
         className="mx-auto max-w-7xl"
         initial={{ opacity: 0, y: 28 }}

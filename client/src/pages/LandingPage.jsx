@@ -37,7 +37,9 @@ export function LandingPage() {
 
     const target = document.querySelector(location.hash);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const navbarOffset = 72;
+      const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: elementPosition - navbarOffset, behavior: "smooth" });
     }
   }, [location.hash]);
 

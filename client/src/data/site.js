@@ -35,11 +35,11 @@ export const turf = {
 };
 
 export const navItems = [
+  { label: "Home", href: "/" },
   { label: "Gallery", href: "#gallery" },
   { label: "Amenities", href: "#amenities" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Contact", href: "#contact" },
-  { label: "Admin", href: "/admin" }
+  { label: "Contact", href: "#contact" }
 ];
 
 export const gallery = [
