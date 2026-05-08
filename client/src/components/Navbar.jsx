@@ -1,13 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { navItems } from "../data/site";
 import { PremiumButton } from "./PremiumButton";
 
 export function Navbar() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeHash, setActiveHash] = useState(() => window.location.hash || "");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -15,6 +18,29 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const onHashChange = () => setActiveHash(window.location.hash || "");
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const handleAnchorClick = (event, href) => {
+    event.preventDefault();
+    setOpen(false);
+
+    if (location.pathname !== "/") {
+      navigate({ pathname: "/", hash: href });
+      return;
+    }
+
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", href);
+      setActiveHash(href);
+    }
+  };
 
   return (
     <header
@@ -34,24 +60,40 @@ export function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-2 rounded-full border border-black/10 bg-white/80 px-2 py-1 shadow-sm md:flex">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.label}
-              to={item.href}
-              className={({ isActive }) =>
-                `relative rounded-full px-4 py-2 text-xs font-black uppercase text-black/70 transition hover:text-line ${
-                  isActive ? "text-line" : ""
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  {isActive && <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-line/10" />}
-                  <span className="relative">{item.label}</span>
-                </>
-              )}
-            </NavLink>
-          ))}
+          {navItems.map((item) => {
+            const isAnchor = item.href.startsWith("#");
+            const anchorActive = isAnchor && activeHash === item.href;
+
+            return isAnchor ? (
+              <a
+                key={item.label}
+                href={item.href}
+                className={`relative rounded-full px-4 py-2 text-xs font-black uppercase text-black/70 transition hover:text-line ${
+                  anchorActive ? "text-line" : ""
+                }`}
+                onClick={(event) => handleAnchorClick(event, item.href)}
+              >
+                <span className="relative">{item.label}</span>
+              </a>
+            ) : (
+              <NavLink
+                key={item.label}
+                to={item.href}
+                className={({ isActive: routeActive }) =>
+                  `relative rounded-full px-4 py-2 text-xs font-black uppercase text-black/70 transition hover:text-line ${
+                    routeActive ? "text-line" : ""
+                  }`
+                }
+              >
+                {({ isActive: routeActive }) => (
+                  <>
+                    {routeActive && <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-line/10" />}
+                    <span className="relative">{item.label}</span>
+                  </>
+                )}
+              </NavLink>
+            );
+          })}
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -76,16 +118,28 @@ export function Navbar() {
             exit={{ opacity: 0, y: -16 }}
           >
             <div className="flex flex-col gap-3">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className="rounded-3xl bg-black/[0.04] px-4 py-3 font-black uppercase text-black"
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isAnchor = item.href.startsWith("#");
+                return isAnchor ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="rounded-3xl bg-black/[0.04] px-4 py-3 font-black uppercase text-black"
+                    onClick={(event) => handleAnchorClick(event, item.href)}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="rounded-3xl bg-black/[0.04] px-4 py-3 font-black uppercase text-black"
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
               <PremiumButton to="/book" onClick={() => setOpen(false)}>
                 Book Slot
               </PremiumButton>

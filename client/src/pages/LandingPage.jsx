@@ -10,7 +10,8 @@ import {
   Trophy,
   Users
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Lightbox } from "../components/Lightbox";
 import { PageTransition } from "../components/PageTransition";
 import { PremiumButton } from "../components/PremiumButton";
@@ -28,7 +29,17 @@ const reveal = {
 };
 
 export function LandingPage() {
+  const location = useLocation();
   const [preview, setPreview] = useState(null);
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const target = document.querySelector(location.hash);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [location.hash]);
 
   return (
     <PageTransition>
