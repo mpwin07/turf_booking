@@ -8,14 +8,15 @@ import { LandingPage } from "./pages/LandingPage";
 
 function App() {
   const location = useLocation();
+  const isBookingArea = location.pathname.startsWith("/book");
 
   return (
     <div className="min-h-screen bg-pitch text-black">
-      <Navbar />
+      {!isBookingArea && <Navbar />}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/book" element={<BookingPage />} />
+          <Route path="/book/*" element={<BookingPage />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </AnimatePresence>
